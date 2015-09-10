@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="css/twittler.css" rel="stylesheet" type="text/css">
     <script src="jquery.js"></script>
     <script src="twittler.js"></script>
     <script src="data_generator.js"></script>
@@ -9,16 +10,18 @@
     <header>
       <h1>Twittler</h1> 
     </header>
-    <div class="feed">
+    <div class="container group">
+      <div class="feed">
+      </div>
+      <aside class="user">
+        <h3>Lorenzo De Nobili</h3>
+        <p>A short bio..</p>
+        <ul>
+          <li class="following"></li>
+          <li class="follower"></li>
+        </ul>
+      </aside>
     </div>
-    <aside class="user">
-      <h3>Lorenzo De Nobili</h3>
-      <p>A short bio..</p>
-      <ul>
-        <li class="following"></li>
-        <li class="follower"></li>
-      </ul>
-    </aside>
     <footer>
       <p>Twittler is a cool experiment by: Lorenzo De Nobili - Hack Reactor student</p>
     </footer>

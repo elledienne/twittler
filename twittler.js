@@ -13,7 +13,7 @@ $(document).ready(function(){
     }
     while(latestTweetIndex <= streams.home.length-1){
       var tweet = streams.home[latestTweetIndex];
-      var $tweet = $('<article></article>');
+      var $tweet = $('<article class="tweet"></article>');
       $tweet.html(
         '<section class="tweet-content">' + tweet.message + '</section>' +
         '<section class="tweet-info">' +
