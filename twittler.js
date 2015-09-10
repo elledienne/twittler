@@ -1,7 +1,7 @@
 $(document).ready(function(){
   var latestTweetIndex = null; // This var keeps track of the latest tweet showed
-  var $body = $('body');
-  $body.html('');
+  var $feed = $('body .feed');
+  $feed.html('');
 
   // This function prepend a new DIV inside the BODY element for every new tweet
   var showTweet = function(){
@@ -23,7 +23,7 @@ $(document).ready(function(){
         '  </ul>' +
         '</section>'
       );
-      $tweet.prependTo($body);
+      $tweet.prependTo($feed);
       latestTweetIndex++;
     }
   };
