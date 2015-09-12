@@ -1,3 +1,8 @@
+/* REQUIRED BY .navbar-fixed-top */
+body { 
+  padding-top: 90px; 
+}
+
 li a.navbar-brand {
     float: none;
     padding: 0;
@@ -54,4 +59,14 @@ li a.navbar-brand {
 .tweet .tweet-info .username {
   font-size: 1.2em;
   font-weight: 600;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f8f8;
+  border: 1px solid #e7e7e7;
+  text-align: center;
+  color: #777;
 }
