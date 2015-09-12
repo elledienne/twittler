@@ -3,7 +3,7 @@ li a.navbar-brand {
     padding: 0;
 }
 
-.side-profile {
+.side-profile-img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -11,4 +11,47 @@ li a.navbar-brand {
 
 .center-text {
   text-align: center;
+}
+
+.side-profile ul,
+.tweet-info ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+
+.side-profile ul li,
+.tweet-info ul li{
+  display: inline;
+}
+
+.tweets-count, .following {
+  float: left;
+}
+
+.tweets-count, .following {
+  width: 33.3%;
+}
+
+.center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.tweet {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 20px 15px 20px;
+}
+
+.tweet .tweet-info .username {
+  font-size: 1.2em;
+  font-weight: 600;
 }

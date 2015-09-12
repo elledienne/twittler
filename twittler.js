@@ -15,13 +15,13 @@ $(document).ready(function(){
       var tweet = streams.home[latestTweetIndex];
       var $tweet = $('<article class="tweet"></article>');
       $tweet.html(
-        '<section class="tweet-content">' + tweet.message + '</section>' +
         '<section class="tweet-info">' +
         '  <ul>' +
         '    <li class="username">' + tweet.user + '</li>' +
         '    <li class="timestamp"> ' + tweet.created_at + ' </li>' +
         '  </ul>' +
-        '</section>'
+        '</section>' +
+        '<section class="tweet-content">' + tweet.message + '</section>'
       );
       $tweet.prependTo($feed);
       latestTweetIndex++;
