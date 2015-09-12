@@ -17,7 +17,7 @@ $(document).ready(function(){
       $tweet.html(
         '<section class="tweet-info">' +
         '  <ul>' +
-        '    <li class="username">' + tweet.user + '</li>' +
+        '    <li class="username"><a href="userprofile.html?' + tweet.user + '">' + tweet.user + '</a></li>' +
         '    <li class="timestamp"> - ' + tweet.created_at + ' </li>' +
         '  </ul>' +
         '</section>' +

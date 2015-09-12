@@ -70,3 +70,7 @@ footer {
   text-align: center;
   color: #777;
 }
+
+footer p {
+  margin: 5px 0 5px;
+}
