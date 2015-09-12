@@ -18,7 +18,7 @@ $(document).ready(function(){
         '<section class="tweet-content">' + tweet.message + '</section>' +
         '<section class="tweet-info">' +
         '  <ul>' +
-        '    <li class="user">' + tweet.user + '</li>' +
+        '    <li class="username">' + tweet.user + '</li>' +
         '    <li class="timestamp"> ' + tweet.created_at + ' </li>' +
         '  </ul>' +
         '</section>'
