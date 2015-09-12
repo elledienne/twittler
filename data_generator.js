@@ -3,20 +3,22 @@
  * You can safely leave this file untouched, and confine your changes to index.html.
  */
 
-// set up data structures
-window.streams = {};
-streams.home = [];
-streams.users = {};
-streams.users.shawndrost = [];
-streams.users.sharksforcheap = [];
-streams.users.mracus = [];
-streams.users.douglascalhoun = [];
-window.users = Object.keys(streams.users);
+// // set up data structures
+// window.streams = {};
+// streams.home = [];
+// streams.users = {};
+// streams.users.shawndrost = [];
+// streams.users.sharksforcheap = [];
+// streams.users.mracus = [];
+// streams.users.douglascalhoun = [];
+// window.users = Object.keys(streams.users);
 
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
-  streams.users[username].push(newTweet);
+  console.log(username);
+  console.log(streams.users[username]['tweets'])
+  streams.users[username]['tweets'].push(newTweet);
   streams.home.push(newTweet);
   localStorage.setItem('streams', JSON.stringify(streams));
 };

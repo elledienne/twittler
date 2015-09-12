@@ -8,11 +8,26 @@ li a.navbar-brand {
     padding: 0;
 }
 
-.side-profile-img {
+.profile-image-container{
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  overflow: hidden;
+  background-image: url('../media/img/profile.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
+/*.side-profile-img {
+  display: block;
+  max-width:230px;
+  max-height:230px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  display: hidden;
+}
+*/
 
 .center-text {
   text-align: center;
@@ -49,6 +64,10 @@ li a.navbar-brand {
 
 .no-padding {
   padding: 0;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
 }
 
 .tweet {
