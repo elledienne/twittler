@@ -30,12 +30,13 @@ var showTweet = function(){
   }
   while(latestTweetIndex <= streams.home.length-1){
     var tweet = streams.home[latestTweetIndex];
-    var $tweet = $('<article class="tweet"></article>');
+    var $tweet = $('<article class="tweet bottom-border"></article>');
     $tweet.html(
       '<section class="tweet-info">' +
       '  <ul>' +
       '    <li class="username"><a href="userprofile.html?' + tweet.user + '">' + tweet.user + '</a></li>' +
-      '    <li class="timestamp"> - ' + tweet.created_at + ' </li>' +
+      '    <li class="timestamp" moment="' + tweet.created_at + '"> - ' + moment(tweet.created_at).fromNow() + ' </li>' +
+      
       '  </ul>' +
       '</section>' +
       '<section class="tweet-content">' + tweet.message + '</section>'
@@ -45,17 +46,26 @@ var showTweet = function(){
   }
 };
 
+var updateTimestamps = function(){
+  var tweetsDOM = $('.panel .feed .tweet .timestamp');
+  for(var i = 0; i < tweetsDOM.length; i++){
+    var timestamp = tweetsDOM.eq(i).attr('moment');
+    tweetsDOM.eq(i).text(moment(timestamp, 'x').fromNow());
+  }
+}
+
 // This function keeps checking if new tweets are added to the streams.home array
 var checkUpdates = function(){
   if(latestTweetIndex === null || latestTweetIndex !== streams.home.length){
     showTweet(); // If new tweets -> call the function to show them
   }
-  setTimeout(checkUpdates, 100);
+  updateTimestamps();
+  setTimeout(checkUpdates, 1000);
 }
 
 var filterUserStream = function(stream, username){
   streams.home = stream.users[username].tweets;
-  console.log(streams)
+  //console.log(streams)
   showTweet();
 }
 

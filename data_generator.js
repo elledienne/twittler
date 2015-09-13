@@ -16,8 +16,8 @@
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
-  console.log(username);
-  console.log(streams.users[username]['tweets'])
+  //console.log(username);
+  //console.log(streams.users[username]['tweets'])
   streams.users[username]['tweets'].push(newTweet);
   streams.home.push(newTweet);
   localStorage.setItem('streams', JSON.stringify(streams));
@@ -45,7 +45,7 @@ var generateRandomTweet = function(){
   var tweet = {};
   tweet.user = randomElement(users);
   tweet.message = randomMessage();
-  tweet.created_at = new Date();
+  tweet.created_at = moment();
   addTweet(tweet);
 };
 
@@ -55,7 +55,7 @@ for(var i = 0; i < 10; i++){
 
 var scheduleNextTweet = function(){
   generateRandomTweet();
-  setTimeout(scheduleNextTweet, Math.random() * 1500);
+  setTimeout(scheduleNextTweet, Math.random() * 10500);
 };
 scheduleNextTweet();
 

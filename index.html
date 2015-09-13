@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="css/twittler.css" rel="stylesheet" type="text/css">
     <script src="jquery.js"></script>
+    <script src="moment.js"></script>
     <script src="twittler.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -38,7 +39,18 @@
         </div>
       </aside>
       <div class="panel panel-default col-md-8 no-padding">
-        <div class="feed panel-body no-padding">
+        <div class="panel-body no-padding">
+          <div class="tweet-composer bottom-border">
+            <form class="form">
+              <div class="input-group">
+                <textarea class="form-control" placeholder="What's up?" rows="3" name="tweet-text-composer"></textarea>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary btn-lg" type="button">Tweet</button>
+                </span>
+              </div>
+            </form>
+          </div>
+          <div class="feed"></div>
         </div>
       </div>
     </div>

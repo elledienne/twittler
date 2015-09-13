@@ -70,8 +70,24 @@ li a.navbar-brand {
   margin-bottom: 10px;
 }
 
-.tweet {
+.bottom-border {
   border-bottom: 1px solid #ddd;
+}
+
+.tweet-composer {
+  padding: 15px 20px 15px 20px;
+}
+
+.tweet-composer .btn-lg {
+  padding: 24px 16px;
+  /*margin-left: -10;*/
+}
+
+textarea[name="tweet-text-composer"] {
+    resize: none;
+}
+
+.tweet {
   padding: 15px 20px 15px 20px;
 }
 
