@@ -9,6 +9,7 @@ streams.users.douglascalhoun = new User('Larry Page', 'Just google it', 1739, 19
 streams.users.elledienne = new User('Lorenzo De Nobili', 'I\'m a 22-years-old italian guy. I love coding, i love tweets and most of all i love Hack Reactor =P', 77, 158, 209);
 window.users = Object.keys(streams.users);
 
+var loggedUser = 'elledienne' // Not the safest login system ever, but for the purpose of this website should be enough
 var latestTweetIndex = null; // This var keeps track of the latest tweet showed
 var $feed;
 
@@ -26,9 +27,6 @@ var showTweet = function(){
   if(latestTweetIndex === null){
     latestTweetIndex = 0;
   }
-  if(latestTweetIndex >= 25){ // For development purpose; That continuous flow of tweets was exasperating =P
-    return;
-  }
   while(latestTweetIndex <= streams.home.length-1){
     var tweet = streams.home[latestTweetIndex];
     var $tweet = $('<article class="tweet bottom-border"></article>');
@@ -37,7 +35,6 @@ var showTweet = function(){
       '  <ul>' +
       '    <li class="username"><a href="userprofile.html?' + tweet.user + '">' + tweet.user + '</a></li>' +
       '    <li class="timestamp" moment="' + tweet.created_at + '"> - ' + moment(tweet.created_at).fromNow() + ' </li>' +
-      
       '  </ul>' +
       '</section>' +
       '<section class="tweet-content">' + tweet.message + '</section>'
@@ -57,7 +54,8 @@ var updateTimestamps = function(){
 
 // This function keeps checking if new tweets are added to the streams.home array
 var checkUpdates = function(){
-  if(latestTweetIndex === null || latestTweetIndex !== streams.home.length){
+  // The last logical AND is for development purpose only; That continuous flow of tweets was exasperating =P
+  if((latestTweetIndex === null || latestTweetIndex !== streams.home.length) && latestTweetIndex <= 50){
     showTweet(); // If new tweets -> call the function to show them
   }
   updateTimestamps();
@@ -66,7 +64,6 @@ var checkUpdates = function(){
 
 var filterUserStream = function(stream, username){
   streams.home = stream.users[username].tweets;
-  //console.log(streams)
   showTweet();
 }
 
@@ -97,17 +94,13 @@ $(document).ready(function(){
   var pageURL = window.location.href;
   pageURL = pageURL.slice(pageURL.lastIndexOf('/')+1);
   var page = pageURL.slice(0, pageURL.indexOf('.'));
-  console.log(page);
   
+  var username = window.location.search.slice(1) || loggedUser;
+  updateUserProfile(username);
   if(page === 'index') {
     checkUpdates(); // Here is where the magic begins
-    // var tweetFormDOM = 
-    // tweetFormDOM.find('#send-tweet').on('click',
     $('.tweet-composer #send-tweet').on('click', sendTweet);
   } else if(page === 'userprofile') {
-    console.log('here');
-    var username = window.location.search.slice(1);
-    updateUserProfile(username);
     var streams = JSON.parse(localStorage.getItem('streams'));
     filterUserStream(streams, username);
   }

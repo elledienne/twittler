@@ -3,21 +3,11 @@
  * You can safely leave this file untouched, and confine your changes to index.html.
  */
 
-// // set up data structures
-// window.streams = {};
-// streams.home = [];
-// streams.users = {};
-// streams.users.shawndrost = [];
-// streams.users.sharksforcheap = [];
-// streams.users.mracus = [];
-// streams.users.douglascalhoun = [];
-// window.users = Object.keys(streams.users);
+// the data structure setup has been moved inside twittler.js
 
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
-  //console.log(username);
-  //console.log(streams.users[username]['tweets'])
   streams.users[username]['tweets'].push(newTweet);
   streams.home.push(newTweet);
   localStorage.setItem('streams', JSON.stringify(streams));
@@ -61,12 +51,13 @@ scheduleNextTweet();
 
 // utility function for letting students add "write a tweet" functionality
 // (note: not used by the rest of this file.)
-var writeTweet = function(message){
-  if(!visitor){
-    throw new Error('set the global visitor property!');
-  }
-  var tweet = {};
-  tweet.user = visitor;
-  tweet.message = message;
-  addTweet(tweet);
-};
+// i'm using the sendTweet function instead
+// var writeTweet = function(message){
+//   if(!visitor){
+//     throw new Error('set the global visitor property!');
+//   }
+//   var tweet = {};
+//   tweet.user = visitor;
+//   tweet.message = message;
+//   addTweet(tweet);
+// };
