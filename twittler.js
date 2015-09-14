@@ -6,6 +6,7 @@ streams.users.shawndrost = new User('Steve Jobs', 'An apple a day keeps the doct
 streams.users.sharksforcheap = new User('Bill Gates', 'I used to steal tech stuff, now i\'m a maecenas', 568, 1390, 9247);
 streams.users.mracus = new User('Mark Zuckerberg', 'I LOVE TWITTRL !!! The best social network ever!', 918472, 391, 7193);
 streams.users.douglascalhoun = new User('Larry Page', 'Just google it', 1739, 192, 1324);
+streams.users.elledienne = new User('Lorenzo De Nobili', 'I\'m a 22-years-old italian guy. I love coding, i love tweets and most of all i love Hack Reactor =P', 77, 158, 209);
 window.users = Object.keys(streams.users);
 
 var latestTweetIndex = null; // This var keeps track of the latest tweet showed
@@ -78,7 +79,16 @@ var updateUserProfile = function(username){
   profileDOM.find('.tweets-count .number').text(user.numberOfTweets);
   profileDOM.find('.following .number').text(user.following);
   profileDOM.find('.follower .number').text(user.follower);
+}
 
+var sendTweet = function(){
+  var textareaDOM = $('.tweet-composer .form textarea[name=tweet-text-composer]');
+  var tweet = {};
+  tweet.user = 'elledienne';
+  tweet.message = textareaDOM.val();
+  textareaDOM.val('');
+  tweet.created_at = moment();
+  addTweet(tweet);
 }
 
 $(document).ready(function(){
@@ -91,6 +101,9 @@ $(document).ready(function(){
   
   if(page === 'index') {
     checkUpdates(); // Here is where the magic begins
+    // var tweetFormDOM = 
+    // tweetFormDOM.find('#send-tweet').on('click',
+    $('.tweet-composer #send-tweet').on('click', sendTweet);
   } else if(page === 'userprofile') {
     console.log('here');
     var username = window.location.search.slice(1);
