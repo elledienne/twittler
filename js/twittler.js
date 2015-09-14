@@ -11,7 +11,8 @@ window.users = Object.keys(streams.users);
 
 var loggedUser = 'elledienne' // Not the safest login system ever, but for the purpose of this website should be enough
 var latestTweetIndex = null; // This var keeps track of the latest tweet showed
-var $feed;
+//var $feed;
+var nodes = {};
 
 function User(name, bio, ntweet, following, follower){
   this.name = name;
@@ -21,6 +22,21 @@ function User(name, bio, ntweet, following, follower){
   this.follower = follower;
   this.tweets = [];
 }
+var checkChar = function(){
+  //nodes.textareaDOM = $('.tweet-composer .form textarea[name=tweet-text-composer]');
+  nodes.charCounter = nodes.charCounter || $('.tweet-composer #send-tweet #char-counter');
+  var numberOfChar = 140-nodes.textareaDOM.val().length;
+  nodes.charCounter.text(numberOfChar);
+  if(numberOfChar < 0){
+    nodes.sendTweetButton.prop('disabled', true);
+  } else if(nodes.sendTweetButton.prop('disabled') === true && numberOfChar >= 0){
+    nodes.sendTweetButton.attr('disabled', false);
+  }
+}
+
+$(document).on('keyup', '.tweet-composer textarea', function(){
+  checkChar();
+});
 
 // This function prepend a new DIV inside the BODY element for every new tweet
 var showTweet = function(){
@@ -39,16 +55,16 @@ var showTweet = function(){
       '</section>' +
       '<section class="tweet-content">' + tweet.message + '</section>'
     );
-    $tweet.prependTo($feed);
+    $tweet.prependTo(nodes.feed);
     latestTweetIndex++;
   }
 };
 
 var updateTimestamps = function(){
-  var tweetsDOM = $('.panel .feed .tweet .timestamp');
-  for(var i = 0; i < tweetsDOM.length; i++){
-    var timestamp = tweetsDOM.eq(i).attr('moment');
-    tweetsDOM.eq(i).text(moment(timestamp, 'x').fromNow());
+  //var tweetsDOM = $('.panel .feed .tweet .timestamp');
+  for(var i = 0; i < nodes.tweetsDOM.length; i++){
+    var timestamp = nodes.tweetsDOM.eq(i).attr('moment');
+    nodes.tweetsDOM.eq(i).text(moment(timestamp, 'x').fromNow());
   }
 }
 
@@ -68,29 +84,34 @@ var filterUserStream = function(stream, username){
 }
 
 var updateUserProfile = function(username){
-  $('.side-profile .profile-image-container').css('background-image', 'url(\'media/img/' + username + '.jpg\')');
-  var profileDOM = $('.side-profile');
+  //$('.side-profile .profile-image-container').css('background-image', 'url(\'media/img/' + username + '.jpg\')');
+  nodes.profileDOM = $('.side-profile');
   var user = streams.users[username];
-  profileDOM.find('#name').text(user.name);
-  profileDOM.find('#bio').text(user.bio);
-  profileDOM.find('.tweets-count .number').text(user.numberOfTweets);
-  profileDOM.find('.following .number').text(user.following);
-  profileDOM.find('.follower .number').text(user.follower);
+  nodes.profileDOM.find('.profile-image-container').css('background-image', 'url(\'media/img/' + username + '.jpg\')');
+  nodes.profileDOM.find('#name').text(user.name);
+  nodes.profileDOM.find('#bio').text(user.bio);
+  nodes.profileDOM.find('.tweets-count .number').text(user.numberOfTweets);
+  nodes.profileDOM.find('.following .number').text(user.following);
+  nodes.profileDOM.find('.follower .number').text(user.follower);
 }
 
 var sendTweet = function(){
-  var textareaDOM = $('.tweet-composer .form textarea[name=tweet-text-composer]');
+  //var textareaDOM = $('.tweet-composer .form textarea[name=tweet-text-composer]');
   var tweet = {};
   tweet.user = 'elledienne';
-  tweet.message = textareaDOM.val();
-  textareaDOM.val('');
+  tweet.message = nodes.textareaDOM.val();
+  nodes.textareaDOM.val('');
   tweet.created_at = moment();
   addTweet(tweet);
+  nodes.charCounter.text(140);
 }
 
 $(document).ready(function(){
-  $feed = $('body .feed');
-  $feed.html('');
+  //$feed = $('body .feed');
+  nodes.feed = $('body .feed');
+  nodes.tweetsDOM = $('.panel .feed .tweet .timestamp');
+
+  nodes.feed.html('');
   var pageURL = window.location.href;
   pageURL = pageURL.slice(pageURL.lastIndexOf('/')+1);
   var page = pageURL.slice(0, pageURL.indexOf('.'));
@@ -99,7 +120,9 @@ $(document).ready(function(){
   updateUserProfile(username);
   if(page === 'index') {
     checkUpdates(); // Here is where the magic begins
-    $('.tweet-composer #send-tweet').on('click', sendTweet);
+    nodes.textareaDOM = $('.tweet-composer .form textarea[name=tweet-text-composer]');
+    nodes.sendTweetButton = $('.tweet-composer #send-tweet');
+    nodes.sendTweetButton.on('click', sendTweet);
   } else if(page === 'userprofile') {
     var streams = JSON.parse(localStorage.getItem('streams'));
     filterUserStream(streams, username);
